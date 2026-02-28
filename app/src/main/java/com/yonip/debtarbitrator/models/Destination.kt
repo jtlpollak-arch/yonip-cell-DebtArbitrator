@@ -32,8 +32,8 @@ data class Destination(
     val latitude: Double,
     val longitude: Double,
     val timezoneId: String,
-    val startDate: Long,
-    val endDate: Long,
+    val arrivalDate:  Long = System.currentTimeMillis(),
+    val departureDate : Long = System.currentTimeMillis(),
     val createdAt: Long = System.currentTimeMillis(),
     val updatedAt: Long = System.currentTimeMillis()
 )
