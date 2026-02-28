@@ -29,7 +29,7 @@ import com.yonip.debtarbitrator.models.User
         ExpensePayer::class,
         Category::class
     ],
-    version = 4, // בכל שינוי Schema בעתיד נעלה את המספר
+    version = 7, // בכל שינוי Schema בעתיד נעלה את המספר
     exportSchema = false
 )
 

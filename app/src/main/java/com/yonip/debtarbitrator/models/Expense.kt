@@ -5,38 +5,41 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import java.util.UUID
 
-
 @Entity(
     tableName = "expenses",
     foreignKeys = [
+        // 1. קישור ליעד (Destination) - במקום לטיול ישירות
         ForeignKey(
             entity = Destination::class,
             parentColumns = ["id"],
             childColumns = ["destinationId"],
             onDelete = ForeignKey.CASCADE
         ),
+        // 2. קישור למשתמש (המשלם)
         ForeignKey(
             entity = User::class,
             parentColumns = ["id"],
-            childColumns = ["participantId"] // שיניתי ל-participantId שיתאים לשדה למטה
+            childColumns = ["participantId"]
         ),
+        // 3. קישור לקטגוריה
+        ForeignKey(
+            entity = Category::class,
+            parentColumns = ["id"],
+            childColumns = ["categoryId"]
+        ),
+        // 4. קישור למטבע
         ForeignKey(
             entity = Currency::class,
             parentColumns = ["id"],
             childColumns = ["currencyId"]
-        ),
-        ForeignKey(
-            entity = Category::class, // המפתח הזר החדש לקטגוריה
-            parentColumns = ["id"],
-            childColumns = ["categoryId"]
         )
     ]
 )
 data class Expense(
     @PrimaryKey val id: UUID,
-    val destinationId: UUID,
-    val participantId: UUID, // המשלם
-    val categoryId: Int,     // המפתח הזר לקטגוריה
+    val destinationId: UUID,    // המפתח הזר ליעד (חייב להתאים ל-childColumns למעלה)
+    val participantId: UUID,    // המפתח הזר למשתמש
+    val categoryId: Int,        // המפתח הזר לקטגוריה
     val description: String,
     val amount: Double,
     val currencyId: Long,
